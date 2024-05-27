@@ -1,0 +1,27 @@
+<div class="p-3">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <form [formGroup]="userForm" (ngSubmit)="saveReservation()">
+            <div class="mb-3">
+              <label class="form-label">id user</label>
+              <input class="form-control" formControlName="user">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">id session</label>
+              <input class="form-control" formControlName="session">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">reservationStatus</label>
+              <select class="form-control" formControlName="reservationStatus">
+                <option *ngFor="let reservationStatuss of reservationStatus" [value]="reservationStatuss">{{ reservationStatuss }}</option>
+              </select>
+            </div>
+            <button [disabled]="userForm.invalid" class="btn btn-success">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

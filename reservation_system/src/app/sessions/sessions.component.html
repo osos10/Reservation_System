@@ -1,0 +1,52 @@
+<div class="container mt-2">
+  <ng-container *ngIf="sessions | async as listsessions; else failureOrLoading">
+    <div class="card">
+      <div class="card-header">Users</div>
+      <div class="card-body">
+        <div *ngIf="searchFormGroup">
+          <form [formGroup]="searchFormGroup" (ngSubmit)="handleSearchSessions()">
+            <div class="input-group">
+              <label class="input-group-text">Keyword :</label>
+              <input type="text" formControlName="keyword" class="form-control">
+              <button class="btn btn-info">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>ID</th><th>Date</th><th>startTime</th><th>endTime</th><th>maxReservations</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let c of listsessions">
+            <td>{{c.id}}</td>
+            <td>{{c.date}}</td>
+            <td>{{c.startTime}}</td>
+            <td>{{c.endTime}}</td>
+            <td>{{c.maxReservations}}</td>
+            <td>
+              <button (click)="handleDeleteSession(c)" class="btn btn-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #failureOrLoading>
+    <ng-container *ngIf="errorMessage; else loading">
+      <div class="text-danger">
+        {{errorMessage}}
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      Loading .....
+    </ng-template>
+  </ng-template>
+</div>
